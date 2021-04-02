@@ -15,6 +15,9 @@ const Navbar = () => {
           <Link to="/profile">Profile</Link>
         </li>,
         <li>
+          <Link to="/myFollowingPost">FollowingPost</Link>
+        </li>,
+        <li>
           <button
             class="btn waves-effect waves-light"
             onClick={() => {

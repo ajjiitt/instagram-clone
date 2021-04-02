@@ -65,10 +65,10 @@ router.post("/signin", (req, res) => {
               { _id: savedUser._id },
               process.env.SECRET_KEY
             );
-            const { _id, name, email } = savedUser;
+            const { _id, name, email, followers, following } = savedUser;
             res.json({
               token,
-              user: { _id, name, email }
+              user: { _id, name, email, followers, following },
             });
           } else {
             return res.json({ message: "Invalid Username or Password" });

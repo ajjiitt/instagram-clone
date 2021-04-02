@@ -1,8 +1,8 @@
-import React, { useEffect, useState ,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../App";
 
 const Profile = () => {
-  const {state, dispatch} = useContext(UserContext)
+  const { state, dispatch } = useContext(UserContext);
   const [pic, setPic] = useState([]);
   useEffect(() => {
     fetch("/mypost", {
@@ -38,7 +38,8 @@ const Profile = () => {
           />
         </div>
         <div>
-          <h4>{state ? state.name:"loading..."}</h4>
+          <h4>{state ? state.name : "loading..."}</h4>
+          <h4>{state ? state.email : "loading..."}</h4>
           <div
             style={{
               display: "flex",
@@ -46,9 +47,9 @@ const Profile = () => {
               justifyContent: "space-between",
             }}
           >
-            <h6>40Posts</h6>
-            <h6>40Followers</h6>
-            <h6>40Followings</h6>
+            <h6>{pic.length} Posts</h6>
+            <h6>{state ? state.followers.length : "0 "} Followers</h6>
+            <h6>{state ? state.following.length : "0 "} Following</h6>
           </div>
         </div>
       </div>
