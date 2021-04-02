@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../App";
 
 const Profile = () => {
+  const [image, setImage] = useState("");
+  const [url, setUrl] = useState(undefined);
   const { state, dispatch } = useContext(UserContext);
   const [pic, setPic] = useState([]);
   useEffect(() => {
@@ -16,6 +18,51 @@ const Profile = () => {
         setPic(result.mypost);
       });
   }, []);
+
+  useEffect(() => {
+    if (image) {
+      const data = new FormData();
+      data.append("file", image);
+      data.append("upload_preset", "insta-clone");
+      data.append("cloud_name", "omen123");
+
+      fetch("https://api.cloudinary.com/v1_1/omen123/image/upload", {
+        method: "POST",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          fetch("/updatepic", {
+            method: "put",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("jwt"),
+            },
+            body: JSON.stringify({
+              pic: data.url,
+            }),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              localStorage.setItem(
+                "user",
+                JSON.stringify({
+                  ...state,
+                  pic: result.pic,
+                })
+              );
+              dispatch({ type: "UPDATEPIC", payload: result.pic });
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [image]);
+  const updatePhoto = async (file) => {
+    setImage(file);
+  };
+
   return (
     <div style={{ maxWidth: "550px", margin: "0px auto" }}>
       <div
@@ -33,9 +80,25 @@ const Profile = () => {
               height: "160px",
               borderRadius: "80px",
             }}
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjF8fHByb2ZpbGV8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            src={
+              state
+                ? state.pic
+                : "https://res.cloudinary.com/omen123/image/upload/v1617388397/pcoplxipnaalpwhhefuv.png"
+            }
             alt=""
           />
+          <div className="file-field input-field" style={{ margin: "10px" }}>
+            <div className="btn #64b5f6 blue darken-1">
+              <span>Update profile pic</span>
+              <input
+                type="file"
+                onChange={(e) => updatePhoto(e.target.files[0])}
+              />
+            </div>
+            <div className="file-path-wrapper">
+              <input className="file-path validate" type="text" />
+            </div>
+          </div>
         </div>
         <div>
           <h4>{state ? state.name : "loading..."}</h4>

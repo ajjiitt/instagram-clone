@@ -59,7 +59,7 @@ const CreatePost = () => {
   };
   return (
     <div
-      className="card imput-filed"
+      className="card input-filed"
       style={{
         margin: "10px auto",
         maxWidth: "500px",

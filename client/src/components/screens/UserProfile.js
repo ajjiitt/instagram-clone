@@ -52,7 +52,7 @@ const UserProfile = () => {
             },
           };
         });
-        setShowfollow(false)
+        setShowfollow(false);
       });
   };
   const unFollowUser = () => {
@@ -86,7 +86,7 @@ const UserProfile = () => {
             },
           };
         });
-        setShowfollow(true)
+        setShowfollow(true);
       });
   };
 
@@ -109,7 +109,11 @@ const UserProfile = () => {
                   height: "160px",
                   borderRadius: "80px",
                 }}
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjF8fHByb2ZpbGV8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                src={
+                  userProfile
+                    ? userProfile.user.pic
+                    : "https://res.cloudinary.com/omen123/image/upload/v1617388397/pcoplxipnaalpwhhefuv.png"
+                }
                 alt=""
               />
             </div>
