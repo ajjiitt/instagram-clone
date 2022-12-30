@@ -15,7 +15,7 @@ const Navbar = () => {
           <Link to="/profile">Profile</Link>
         </li>,
         <li>
-          <Link to="/myFollowingPost">FollowingPost</Link>
+          <Link to="/myFollowingPost">Feeds</Link>
         </li>,
         <li>
           <button
@@ -45,7 +45,7 @@ const Navbar = () => {
     <nav>
       <div className="nav-wrapper white ">
         <Link to={state ? "/" : "/signin"} className="brand-logo left">
-          Instagram
+          Uppics
         </Link>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           {renderList()}

@@ -67,7 +67,7 @@ const Signup = () => {
   return (
     <div className="mycard">
       <div className="card auth-card">
-        <h2>Instagram</h2>
+        <h2>Uppics</h2>
         <input
           type="text"
           placeholder="Email"
